@@ -1,6 +1,6 @@
 require("dotenv").config();
 const stripe = require("stripe")(
-  "sk_test_51M6nniGbcxB7Lr4KjuAAeyDLdwwdrsMXSw2bGWix2CN7ybOwSZECT5azlhmZEmwm97YaFn2cqm5IumLL56seUbrW00PaT1VPxq"
+  "sk_test_51HQPZTL89azWpJQTRZ5WtsNDzYVvgePJLh2EID7q9lowxIUcLZ7C1LbRPpEcojYwVLK8gIpYxB5Me51A4uusVMSd00691dabgP"
 );
 
 exports.handler = async (event) => {

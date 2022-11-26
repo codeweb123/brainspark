@@ -28,38 +28,34 @@ const PaymentForm = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ amount: amount * 100 }),
-        }).then((res) => {return res.json()
-    })
+        }).then((res) => res.json())
+        const clientSecret = response.paymentIntent.client_secret;
 
-    const clientSecret = response.paymentIntent.client_secret;
-
-    const paymentResult = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: currentUser ? currentUser.displayName : 'Mrs. T',
-        },
-      },
-    });
-
-    setIsProcessingPayment(false);
-
-    if (paymentResult.error) {
-      alert(paymentResult.error.message);
-    } else {
-      if (paymentResult.paymentIntent.status === 'succeeded') {
-        alert('Payment Successful!');
-      }
-    }
-  };
-
+        const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+            billing_details: {
+              name: currentUser ? currentUser.displayName : 'Mrs. T',
+            },
+          },
+        });
+    
+        setIsProcessingPayment(false);
+    
+        if (paymentResult.error) {
+          alert(paymentResult.error.message);
+        } else {
+          if (paymentResult.paymentIntent.status === 'succeeded') {
+            alert('Payment Successful!');
+          }
+        }
+      };
+    
     return (
-        <div className='payment-form' onSubmit={paymentHandler}>
-           
+        <div className='payment-form'>
             <h2>Credit Card Payment: </h2>
             <CardElement />
-            <Button isloading={isProcessingPayment}> Pay Now </Button>
-        
+            <Button isloading={isProcessingPayment} onSubmit={paymentHandler}> Pay Now </Button>
         </div>
     
     )
