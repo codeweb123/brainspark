@@ -1,8 +1,7 @@
 .category-preview-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
-    margin-top: 130px;
+    margin: 40px;
   
     .title {
       font-size: 28px;
@@ -14,6 +13,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       column-gap: 20px;
+    
     }
   }
   
