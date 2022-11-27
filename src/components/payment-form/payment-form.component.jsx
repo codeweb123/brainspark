@@ -1,14 +1,15 @@
-//import { useState } from 'react'
 import { CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
-//import { useSelector } from 'react-redux'
-//import { selectCartTotal } from '../../store/cart/cart.selector';
-//import { selectCurrentUser } from '../../store/user/user.selector';
+import { useSelector } from 'react-redux'
+import { selectCartTotal } from '../../store/cart/cart.selector';
+import { selectCurrentUser } from '../../store/user/user.selector';
 import Button from '../button/button.component'
 import './payment-form.styles.scss'
 
 const PaymentForm = () => {
     const stripe = useStripe()
     const elements = useElements()
+    const amount = useSelector(selectCartTotal);
+    const currentUser = useSelector(selectCurrentUser);
 
     const paymentHandler = async (e) => {
         e.preventDefault();
@@ -22,7 +23,7 @@ const PaymentForm = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ amount: 1000 }),
+            body: JSON.stringify({ amount: amount * 100 }),
         }).then((res) => res.json())
         const clientSecret = response.paymentIntent.client_secret;
 
@@ -30,7 +31,7 @@ const PaymentForm = () => {
           payment_method: {
             card: elements.getElement(CardElement),
             billing_details: {
-                name:'Jiyon Trammell',
+                name: currentUser ? currentUser.displayName : 'Jiyon Trammell',
             },
           },
         });
@@ -54,12 +55,4 @@ const PaymentForm = () => {
 }
 
 export default PaymentForm;
-
-    //const amount = useSelector(selectCartTotal);
-    //const currentUser = useSelector(selectCurrentUser);
-    //const [isProcessingPayment, setIsProcessingPayment] = useState(false);
-
- //setIsProcessingPayment(true);
-
-    //setIsProcessingPayment(false);
 
