@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+Brainspark is a mock Edtech website created with a React/Redux frontend and utilizes React reuseable components. It features a Firebase/Firestore API backend with Stripe payment integration. Teachers and parents can search to add learning resources to a cart, checkout and pay with Stripe's credit card element.  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with Create React App.
 
 ## Available Scripts
 
